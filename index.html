@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareSync Health Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Connected Care Platform</p>
+        <h1>CareSync keeps patients, medicines, and caregivers on the same page.</h1>
+        <p class="hero-text">
+          A simple digital health dashboard for patient records, medicine reminders, caregiver visibility,
+          blood pressure alerts, and one-tap emergency actions.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn" id="requestNotifications">Enable Reminder Alerts</button>
+          <a class="ghost-btn" href="#dashboard">Open Dashboard</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="stat-chip">
+          <span>Next dose</span>
+          <strong id="nextDoseHero">No medicines added</strong>
+        </div>
+        <div class="stat-grid">
+          <article>
+            <span>Patients</span>
+            <strong id="patientCount">1</strong>
+          </article>
+          <article>
+            <span>Today's meds</span>
+            <strong id="todayMedCount">0</strong>
+          </article>
+          <article>
+            <span>Active alerts</span>
+            <strong id="activeAlertCount">0</strong>
+          </article>
+        </div>
+      </div>
+    </header>
+
+    <main id="dashboard" class="dashboard-grid">
+      <section class="panel panel-form">
+        <div class="panel-heading">
+          <p class="section-tag">Patient Details</p>
+          <h2>Central digital health record</h2>
+        </div>
+        <form id="patientForm" class="form-grid">
+          <label>
+            Full name
+            <input type="text" id="patientName" placeholder="Enter patient name" required>
+          </label>
+          <label>
+            Age
+            <input type="number" id="patientAge" min="1" max="120" placeholder="Age" required>
+          </label>
+          <label>
+            Doctor phone
+            <input type="tel" id="doctorPhone" placeholder="+91 98765 43210">
+          </label>
+          <label class="full-span">
+            Diagnosed diseases
+            <input type="text" id="patientDiseases" placeholder="Diabetes, BP, asthma...">
+          </label>
+          <label class="full-span">
+            Medical history
+            <textarea id="patientHistory" rows="4" placeholder="Surgeries, allergies, past treatments, chronic symptoms..."></textarea>
+          </label>
+          <button type="submit" class="primary-btn full-span">Save Patient Details</button>
+        </form>
+      </section>
+
+      <section class="panel panel-summary">
+        <div class="panel-heading">
+          <p class="section-tag">Patient Summary</p>
+          <h2>Live health overview</h2>
+        </div>
+        <div id="patientSummary" class="summary-card"></div>
+        <div class="quick-actions">
+          <a class="action-btn emergency" id="callDoctorBtn" href="tel:+911234567890">Call Doctor</a>
+          <button class="action-btn" id="viewRecordsBtn">View Records</button>
+          <button class="action-btn" id="jumpMedicationBtn">Add Medication</button>
+        </div>
+      </section>
+
+      <section class="panel panel-form" id="medicationSection">
+        <div class="panel-heading">
+          <p class="section-tag">Medicine Reminder</p>
+          <h2>Add medicine schedule</h2>
+        </div>
+        <form id="medicationForm" class="form-grid">
+          <label>
+            Medicine name
+            <input type="text" id="medicineName" placeholder="Metformin" required>
+          </label>
+          <label>
+            Dosage
+            <input type="text" id="medicineDose" placeholder="500 mg" required>
+          </label>
+          <label>
+            Reminder time
+            <input type="time" id="medicineTime" required>
+          </label>
+          <label>
+            Frequency
+            <select id="medicineFrequency">
+              <option value="Daily">Daily</option>
+              <option value="Twice a day">Twice a day</option>
+              <option value="Weekly">Weekly</option>
+            </select>
+          </label>
+          <button type="submit" class="primary-btn full-span">Add Medication</button>
+        </form>
+        <div id="medicationList" class="list-stack"></div>
+      </section>
+
+      <section class="panel panel-form">
+        <div class="panel-heading">
+          <p class="section-tag">Smart Monitoring</p>
+          <h2>Blood pressure tracker</h2>
+        </div>
+        <form id="bpForm" class="form-grid">
+          <label>
+            Systolic BP
+            <input type="number" id="systolicInput" placeholder="120" required>
+          </label>
+          <label>
+            Diastolic BP
+            <input type="number" id="diastolicInput" placeholder="80" required>
+          </label>
+          <button type="submit" class="primary-btn full-span">Update BP Reading</button>
+        </form>
+        <div id="healthAlertBox" class="alert-box calm">
+          Add a blood pressure reading to generate smart health alerts.
+        </div>
+      </section>
+
+      <section class="panel panel-caregiver">
+        <div class="panel-heading">
+          <p class="section-tag">Caregiver View</p>
+          <h2>Treatment visibility in one place</h2>
+        </div>
+        <div id="caregiverPanel" class="caregiver-layout"></div>
+      </section>
+
+      <section class="panel panel-alerts">
+        <div class="panel-heading">
+          <p class="section-tag">Notifications</p>
+          <h2>Recent alerts and reminders</h2>
+        </div>
+        <div id="notificationFeed" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
